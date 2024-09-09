@@ -30,7 +30,7 @@ To run this project, you'll need:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/JoannaYe51/WeSplitApp.git
+git clone https://github.com/JoannaYe51/CS4261-PA1.git
 cd WeSplitApp
 ```
 
