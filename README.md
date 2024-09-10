@@ -13,7 +13,7 @@ This project is a SwiftUI application called **WeSplit** that includes user auth
 
 ## Features
 
-- **SwiftUI App**: A simple UI for managing user registration and login.
+- **SwiftUI App**: A simple UI for managing user registration and login, and help user spliting their bills.
 - **Node.js Backend**: Provides API endpoints for user authentication with MongoDB.
 - **JWT Authentication**: JSON Web Tokens used for secure authentication.
 
@@ -31,7 +31,7 @@ To run this project, you'll need:
 
 ```bash
 git clone https://github.com/JoannaYe51/CS4261-PA1.git
-cd WeSplitApp
+cd CS4261-PA1
 ```
 
 ### 2. SwiftUI Application Setup
@@ -54,6 +54,7 @@ You should see the message Server is running on port 5001 if the server starts s
 
 ## Running the SwiftUI App
 Make sure the backend is running before launching the SwiftUI app.
-In Xcode, select the target device (Simulator or physical device).
+In Xcode, double click **WeSplit.xcodeproj** to open the application. 
+Select the target device (Simulator or physical device).
 Click **Run** (**⌘ + R**) to build and run the app.
 Test the app by signing up or logging in. The app communicates with the backend for user authentication.
