@@ -45,9 +45,9 @@ struct ContentView: View {  //different views
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
                             
-                    Picker("Number of people", selection: $numberOfPeople) {
+                    Picker("Party Size", selection: $numberOfPeople) {
                         ForEach(2..<100) {
-                            Text("\($0) people")
+                            Text("\($0)")
                         }
                     }
                 }
@@ -71,6 +71,8 @@ struct ContentView: View {  //different views
                 
                 Section {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                        .font(.title2)
+                        .foregroundColor(.blue)
                 } header: {
                     Text("Total amount per person: ")
                 }
