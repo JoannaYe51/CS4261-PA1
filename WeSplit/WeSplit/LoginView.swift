@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @State private var isLoggedIn: Bool = false
     @State private var showAlert = false
@@ -22,20 +22,23 @@ struct LoginView: View {
                     .font(.largeTitle)
                     .padding(.bottom, 40)
                 
-                TextField("Username", text: $username)
+                TextField("Email", text: $email)
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(5.0)
                     .padding(.bottom, 20)
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.emailAddress)
                 
                 SecureField("Password", text: $password)
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(5.0)
                     .padding(.bottom, 20)
+                    .textInputAutocapitalization(.never)
                 
                 Button(action: {
-                    login(username: username, password: password)
+                    login(email: email, password: password)
                 }) {
                     Text("Login")
                         .font(.headline)
@@ -48,9 +51,12 @@ struct LoginView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text("Login Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
+                HStack {
+                    Text("Don't have an account?").foregroundStyle(.gray)
+                    NavigationLink("Sign Up", destination: SignupView())
+                }
+                .padding(.top, 20)
                 
-                NavigationLink("Don't have an account? Sign Up", destination: SignupView())
-                    .padding(.top, 20)
             }
             .padding()
             .fullScreenCover(isPresented: $isLoggedIn) {
@@ -60,14 +66,14 @@ struct LoginView: View {
     }
 
     // Function to send login request to the backend
-    func login(username: String, password: String) {
+    func login(email: String, password: String) {
         guard let url = URL(string: "http://128.61.41.164:5001/api/login") else { return }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body: [String: Any] = ["username": username, "password": password]
+        let body: [String: Any] = ["email": email, "password": password]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
         URLSession.shared.dataTask(with: request) { data, response, error in

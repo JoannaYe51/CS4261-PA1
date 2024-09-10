@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		126D147A2C8F576600A120D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126D14792C8F576600A120D1 /* LoginView.swift */; };
 		126D147C2C8F650800A120D1 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126D147B2C8F650800A120D1 /* SignupView.swift */; };
+		12D2A6422C909DA5003C515F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2A6412C909DA5003C515F /* Validation.swift */; };
 		57C00B00290F7EED00AC2AE2 /* WeSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C00AFF290F7EED00AC2AE2 /* WeSplitApp.swift */; };
 		57C00B02290F7EED00AC2AE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C00B01290F7EED00AC2AE2 /* ContentView.swift */; };
 		57C00B04290F7EEE00AC2AE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57C00B03290F7EEE00AC2AE2 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 		126D14792C8F576600A120D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		126D147B2C8F650800A120D1 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		12AE0E672C8F74F900F7D453 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12D2A6412C909DA5003C515F /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		57C00AFC290F7EED00AC2AE2 /* WeSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57C00AFF290F7EED00AC2AE2 /* WeSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeSplitApp.swift; sourceTree = "<group>"; };
 		57C00B01290F7EED00AC2AE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				57C00B01290F7EED00AC2AE2 /* ContentView.swift */,
 				126D14792C8F576600A120D1 /* LoginView.swift */,
 				126D147B2C8F650800A120D1 /* SignupView.swift */,
+				12D2A6412C909DA5003C515F /* Validation.swift */,
 				57C00B03290F7EEE00AC2AE2 /* Assets.xcassets */,
 				57C00B05290F7EEE00AC2AE2 /* Preview Content */,
 			);
@@ -148,6 +151,7 @@
 				126D147C2C8F650800A120D1 /* SignupView.swift in Sources */,
 				126D147A2C8F576600A120D1 /* LoginView.swift in Sources */,
 				57C00B02290F7EED00AC2AE2 /* ContentView.swift in Sources */,
+				12D2A6422C909DA5003C515F /* Validation.swift in Sources */,
 				57C00B00290F7EED00AC2AE2 /* WeSplitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

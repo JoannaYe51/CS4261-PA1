@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct SignupView: View {
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     @State private var isSignedUp: Bool = false
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var showSuccessfulMessage = false
 
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct SignupView: View {
                 .font(.largeTitle)
                 .padding(.bottom, 40)
             
-            TextField("Username", text: $username)
+            TextField("Email", text: $email)
                 .padding()
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(5.0)
@@ -40,11 +41,17 @@ struct SignupView: View {
                 .padding(.bottom, 20)
             
             Button(action: {
-                if password == confirmPassword && !username.isEmpty {
-                    signUp(username: username, password: password)
-                } else {
+                if !Validation.emailValidation(email) {
+                    alertMessage = "Invalid email format."
+                    showAlert = true
+                } else if !Validation.passwordValidation(password) {
+                    alertMessage = "Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character."
+                    showAlert = true
+                } else if password != confirmPassword || email.isEmpty {
                     alertMessage = "Passwords do not match or fields are empty."
                     showAlert = true
+                } else {
+                    signUp(email: email, password: password)
                 }
             }) {
                 Text("Sign Up")
@@ -58,19 +65,25 @@ struct SignupView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Sign-Up Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
+            if showSuccessfulMessage {
+                Text("Sign up successful!")
+                    .foregroundColor(.green)
+                    .font(.headline)
+                    .padding(.top, 20)
+            }
         }
         .padding()
     }
 
     // Function to send signup request to the backend
-    func signUp(username: String, password: String) {
+    func signUp(email: String, password: String) {
         guard let url = URL(string: "http://128.61.41.164:5001/api/signup") else { return }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body: [String: Any] = ["username": username, "password": password]
+        let body: [String: Any] = ["email": email, "password": password]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -93,6 +106,7 @@ struct SignupView: View {
             // Navigate to login view after successful signup
             DispatchQueue.main.async {
                 isSignedUp = true
+                showSuccessfulMessage = true
             }
         }.resume()
     }

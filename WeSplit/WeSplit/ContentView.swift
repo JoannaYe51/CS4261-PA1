@@ -12,6 +12,7 @@ struct ContentView: View {  //different views
     @State private var checkAmount = 0.0
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
+    @State private var note = ""
     @FocusState private var amountIsFocused: Bool
     
     let tipPercentages = [10, 15, 20, 25, 0]
@@ -50,6 +51,11 @@ struct ContentView: View {  //different views
                             Text("\($0)")
                         }
                     }
+                    
+                    TextField("Note", text: $note)
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(5.0)
                 }
                 
                 Section {
@@ -83,10 +89,44 @@ struct ContentView: View {  //different views
                     Spacer()
                     Button("Done") {
                         amountIsFocused = false
+                        saveToHistory()
                     }
                 }
             }
         }
+    }
+    
+    func saveToHistory() {
+        let total = totalPerPerson
+        let note = self.note
+        
+        let history = [
+            "amount": total,
+            "note": note,
+            "date": Date().timeIntervalSince1970
+        ] as [String : Any]
+        
+        guard let url = URL(string: "http://128.61.41.164:5001/api/history") else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        request.httpBody = try? JSONSerialization.data(withJSONObject: history)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Failed to save: \(error.localizedDescription)")
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
+                print("Failed to save: Invalid response")
+                return
+            }
+
+            print("Saved successfully!")
+        }.resume()
     }
 }
 
