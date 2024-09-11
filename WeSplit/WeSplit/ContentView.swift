@@ -31,7 +31,7 @@ struct ContentView: View {  //different views
         
         func body(content: Content) -> some View {
             if tips == 0 {
-                content.foregroundColor(Color.red)
+                content.foregroundColor(Color.orange)
             } else {
                 content.foregroundColor(.primary)
             }
@@ -122,6 +122,17 @@ struct ContentView: View {  //different views
 
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
                 print("Failed to save: Invalid response")
+                return
+            }
+            
+            //just adding more error handler to make sure
+            if httpResponse.statusCode != 201 {
+                // Localization error
+                if let localizedData = data, let errorMessage = String(data: localizedData, encoding: .utf8) {
+                    print("Failed to save: \(errorMessage)")
+                } else {
+                    print("Failed to save: Invalid status code \(httpResponse.statusCode)")
+                }
                 return
             }
 
